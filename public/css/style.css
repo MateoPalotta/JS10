@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900&display=swap');
+
+html{
+    background-color: #FAF9F6;
+}
+
+*{
+    font-family: "Lato", sans-serif;
+}
+
+h1{
+    text-align: center;
+    font-size: 3.5vw;
+}
+
+h2{
+    text-align: center;
+}
+
+.contenedor-dividido{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.contenedor-imagen{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#imagen{
+    width: 40%;
+}
+
+.contenedor-letras{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#entrada-letra{
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    outline: none;
+    width: 50px;
+    text-align: center;
+    font-size: 1.6vw;
+    background-color: inherit;
+    font-weight: bold;
+}
+
+.contenedor-puntaje{
+    font-size: 1.7vw;
+    font-weight: bold;
+    margin: 30px 60px;
+}
+
+.contenedor-palabra{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.letra, .espacio{
+    width: 43px;
+    height: 55px;
+    margin: 5px;
+}
+
+.letra{
+    border-bottom: 2px solid #000000;
+    padding-bottom: 3px;
+    font-size: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faltante{
+    color: #c70000;
+}
+
+button{
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #000000;
+    border-radius: 25px;
+    outline: none;
+}
+
+button:hover{
+    cursor: pointer;
+}
+
+/* Estilo para la tabla de posiciones */
+.contenedor-tabla {
+    width: 80%;
+    margin: 20px auto;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #d1d1d1;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.contenedor-puntaje {
+    font-size: 1.7vw;
+    font-weight: bold;
+    margin: 30px 60px;
+}
+
+.contenedor-letras {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
