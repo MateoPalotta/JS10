@@ -9,31 +9,50 @@ let keydownHandler = null; // Función que maneja el evento keydown
 
 // Obtiene una palabra aleatoria de la API de palabras aleatorias.
 async function obtenerPalabraAleatoria() {
-    const respuesta = await fetch('https://random-word-api.herokuapp.com/word?lang=es');
+    const respuesta = await fetch('https://clientes.api.greenborn.com.ar/public-random-word');
     const palabra = await respuesta.json();
     return palabra[0];
 }
 
-// Funcion para comenzar el juego
+// Función para comenzar el juego
 async function comenzarJuego() {
-    tiempoInicio = new Date(); // Iniciar el tiempo al comenzar el juego
+    tiempoInicio = new Date();
     const palabra = await obtenerPalabraAleatoria();
     nuevaPalabra(palabra);
     if (keydownHandler) {
         document.removeEventListener("keydown", keydownHandler);
     }
     keydownHandler = (e) => {
-        let letra = e.key.toUpperCase();
-        let letraValida = /^[A-ZÁ-Ú]$/;
+        let letra = e.key.toUpperCase(); // Convierte la letra a mayúscula
+        let letraValida = /^[A-ZÁ-ÚÑ]$/; // Incluye letras con tildes y la Ñ
         if (letra.match(letraValida)) {
-            letraIngresada(letra);
+            letraIngresada(letra); // Procesa la letra ingresada
         }
     };
     document.addEventListener("keydown", keydownHandler);
-    cargarPuntuaciones(); // Cargar las puntuaciones al comenzar el juego
+    cargarPuntuaciones(); // Carga las puntuaciones al comenzar el juego
 }
 
-// Nueva palabra para adivinar.
+// Crear tablero de letras
+function crearTableroLetras() {
+    let contenedorLetras = document.getElementsByClassName("contenedor-letras")[0];
+    contenedorLetras.innerHTML = ''; // Limpiar cualquier contenido anterior
+    let alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
+
+    alfabeto.split('').forEach(letra => {
+        let botonLetra = document.createElement("button");
+        botonLetra.textContent = letra;
+        botonLetra.classList.add("boton-letra");
+        botonLetra.addEventListener("click", () => {
+            letraIngresada(letra);
+            botonLetra.disabled = true;
+            botonLetra.classList.add("usada");
+        });
+        contenedorLetras.appendChild(botonLetra);
+    });
+}
+
+// Nueva palabra para adivinar
 function nuevaPalabra(cadena) {
     letras = Array.from(cadena);
     letrasFaltantes = letras.filter(letra => letra !== " ").length;
@@ -45,12 +64,13 @@ function nuevaPalabra(cadena) {
     });
 }
 
-// verifica la letra ingresada por el usuario
+// Verifica la letra ingresada por el usuario
 function letraIngresada(letra) {
     if (letrasUsadas.includes(letra)) {
         alert("Esa letra ya la usaste");
     } else {
         letrasUsadas.push(letra);
+        actualizarLetrasUsadas();
         if (incluyeLetra(letra)) {
             letraCorrecta(letra);
         } else {
@@ -59,7 +79,18 @@ function letraIngresada(letra) {
     }
 }
 
-// Verifica si la letra esta en la palabra
+// Verifica letras usadas
+function actualizarLetrasUsadas() {
+    let contenedorLetras = document.getElementsByClassName("contenedor-letras")[0];
+    contenedorLetras.innerHTML = ""; // Limpiar las letras anteriores
+    letrasUsadas.forEach(letra => {
+        let letraDiv = document.createElement("div");
+        letraDiv.textContent = letra;
+        contenedorLetras.appendChild(letraDiv);
+    });
+}
+
+// Verifica si la letra está en la palabra
 function incluyeLetra(letra) {
     return letras.some(l => l.toUpperCase() === letra);
 }
@@ -71,7 +102,7 @@ function getIndices(letra) {
         .filter(i => i !== -1);
 }
 
-// verifica letra correcta ingresada
+// Verifica letra correcta ingresada
 function letraCorrecta(letra) {
     let indices = getIndices(letra);
     letrasFaltantes -= indices.length;
@@ -83,7 +114,7 @@ function letraCorrecta(letra) {
     if (letrasFaltantes === 0) ganar();
 }
 
-// verifica letra incorrecta ingresada
+// Verifica letra incorrecta ingresada
 function letraIncorrecta() {
     intentos++;
     let imagenString = "img/" + intentos + ".png";
@@ -91,25 +122,25 @@ function letraIncorrecta() {
     if (intentos === 7) perder();
 }
 
-// función en caso de ganar
+// Función en caso de ganar
 function ganar() {
-    // Calcular el tiempo transcurrido
     let tiempoFin = new Date();
     let tiempoTranscurrido = (tiempoFin - tiempoInicio) / 1000; // Convertir a segundos
-    // Calcular la puntuación
     let puntosBase = 100;
     let penalizacionTiempo = Math.max(0, tiempoTranscurrido - tiempoObjetivo) * -1;
     let penalizacionErrores = (intentos - 1) * -10; // Restar 1 porque el primer intento no cuenta como error
     puntaje = puntosBase + penalizacionTiempo + penalizacionErrores;
+
     let score = document.getElementsByClassName("contenedor-puntaje")[0];
     if (score) {
         score.innerHTML = "Puntaje: " + puntaje;
     }
+
     let fin = document.createElement("h1");
     fin.id = "titulo";
     fin.innerHTML = "Ganaste";
     document.body.replaceChild(fin, document.getElementById("titulo"));
-    // Esperar 5 segundos antes de solicitar el nombre
+
     setTimeout(() => {
         let nombre = prompt("Ingresa tu nombre para guardar tu puntuación:");
         if (nombre) {
@@ -121,7 +152,7 @@ function ganar() {
     }, 5000);
 }
 
-// función al perder el juego
+// Función al perder el juego
 function perder() {
     let fin = document.createElement("h1");
     fin.id = "titulo";

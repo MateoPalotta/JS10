@@ -1,47 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900&display=swap');
 
-html{
+html {
     background-color: #FAF9F6;
 }
 
-*{
+* {
     font-family: "Lato", sans-serif;
 }
 
-h1{
+h1 {
     text-align: center;
     font-size: 3.5vw;
 }
 
-h2{
+h2 {
     text-align: center;
 }
 
-.contenedor-dividido{
+.contenedor-dividido {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-.contenedor-imagen{
+.contenedor-imagen {
     width: 50%;
     display: flex;
     justify-content: center;
 }
 
-#imagen{
+#imagen {
     width: 40%;
 }
 
-.contenedor-letras{
+.contenedor-letras {
     width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#entrada-letra{
+#entrada-letra {
     border: none;
     border-bottom: 1px solid #d1d1d1;
     outline: none;
@@ -52,26 +52,26 @@ h2{
     font-weight: bold;
 }
 
-.contenedor-puntaje{
+.contenedor-puntaje {
     font-size: 1.7vw;
     font-weight: bold;
     margin: 30px 60px;
 }
 
-.contenedor-palabra{
+.contenedor-palabra {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-top: 40px;
 }
 
-.letra, .espacio{
+.letra, .espacio {
     width: 43px;
     height: 55px;
     margin: 5px;
 }
 
-.letra{
+.letra {
     border-bottom: 2px solid #000000;
     padding-bottom: 3px;
     font-size: 3vw;
@@ -80,11 +80,11 @@ h2{
     align-items: center;
 }
 
-.faltante{
+.faltante {
     color: #c70000;
 }
 
-button{
+button {
     width: 150px;
     height: 40px;
     font-size: 18px;
@@ -94,11 +94,10 @@ button{
     outline: none;
 }
 
-button:hover{
+button:hover {
     cursor: pointer;
 }
 
-/* Estilo para la tabla de posiciones */
 .contenedor-tabla {
     width: 80%;
     margin: 20px auto;
@@ -122,15 +121,18 @@ th {
     font-weight: bold;
 }
 
-.contenedor-puntaje {
-    font-size: 1.7vw;
+.contenedor-letras div {
+    display: inline-block;
+    margin: 5px;
+    padding: 6px;
+    border: 1px solid #d1d1d1;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    font-size: 1.0vw;
+    text-align: center;
+    width: 20px;
+    height: 30px;
+    line-height: 30px;
     font-weight: bold;
-    margin: 30px 60px;
-}
-
-.contenedor-letras {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    color: #333333;
 }
