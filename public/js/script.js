@@ -203,7 +203,8 @@ async function guardarPuntuacion(nombre, tiempo, puntos) {
 
 // Carga las puntuaciones desde la base de datos
 async function cargarPuntuaciones() {
-    const response = await fetch('http://localhost:3000/api/scores');
+    const baseUrl = window.location.origin;
+    const response = await fetch(`${baseUrl}/api/scores`);
     if (response.ok) {
         const scores = await response.json();
         mostrarPuntuaciones(scores);
