@@ -19,6 +19,7 @@ Por medio de las API Fetch o Axios conectar a la BBDD y almacenar el score del j
 
 3. Instala las dependencias:
    ```sh
+   npm init -y
    npm i express mysql
 
 # Ejecución
