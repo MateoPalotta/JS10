@@ -70,24 +70,13 @@ function letraIngresada(letra) {
         alert("Esa letra ya la usaste");
     } else {
         letrasUsadas.push(letra);
-        actualizarLetrasUsadas();
+        // actualizarLetrasUsadas(); // Comentado para no mostrar letras usadas
         if (incluyeLetra(letra)) {
             letraCorrecta(letra);
         } else {
             letraIncorrecta();
         }
     }
-}
-
-// Verifica letras usadas
-function actualizarLetrasUsadas() {
-    let contenedorLetras = document.getElementsByClassName("contenedor-letras")[0];
-    contenedorLetras.innerHTML = ""; // Limpiar las letras anteriores
-    letrasUsadas.forEach(letra => {
-        let letraDiv = document.createElement("div");
-        letraDiv.textContent = letra;
-        contenedorLetras.appendChild(letraDiv);
-    });
 }
 
 // Verifica si la letra está en la palabra
