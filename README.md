@@ -10,7 +10,7 @@ Por medio de las API Fetch o Axios conectar a la BBDD y almacenar el score del j
 # Instalación
 
 1. Clona este repositorio:
-git clone https://github.com/MateoPalotta/JS10
+```git clone https://github.com/MateoPalotta/JS10```
 
 2. Navega al directorio del proyecto:
-cd JS10
+```cd JS10```
