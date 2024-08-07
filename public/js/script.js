@@ -130,26 +130,29 @@ function ganar() {
     let penalizacionTiempo = Math.max(0, tiempoTranscurrido - tiempoObjetivo) * -1;
     let penalizacionErrores = (intentos - 1) * -10; // Restar 1 porque el primer intento no cuenta como error
     puntaje = puntosBase + penalizacionTiempo + penalizacionErrores;
-
     let score = document.getElementsByClassName("contenedor-puntaje")[0];
     if (score) {
         score.innerHTML = "Puntaje: " + puntaje;
     }
-
     let fin = document.createElement("h1");
     fin.id = "titulo";
     fin.innerHTML = "Ganaste";
     document.body.replaceChild(fin, document.getElementById("titulo"));
-
     setTimeout(() => {
-        let nombre = prompt("Ingresa tu nombre para guardar tu puntuación:");
-        if (nombre) {
-            guardarPuntuacion(nombre, tiempoTranscurrido, puntaje);
-            crearBoton(); // Crear botón para volver a jugar
-        } else {
-            alert("Por favor, ingresa tu nombre.");
-        }
-    }, 5000);
+        solicitarNombre(tiempoTranscurrido);
+    }, 2570);
+}
+
+// Funcion para solicitar nombre al ganar
+function solicitarNombre(tiempoTranscurrido) {
+    let nombre = prompt("Ingresa tu nombre para guardar tu puntuación:");
+    if (nombre) {
+        guardarPuntuacion(nombre, tiempoTranscurrido, puntaje);
+        crearBoton();
+    } else {
+        alert("Por favor, ingresa tu nombre.");
+        solicitarNombre(tiempoTranscurrido); // Volver a solicitar el nombre
+    }
 }
 
 // Función al perder el juego
@@ -224,7 +227,7 @@ async function guardarPuntuacion(nombre, tiempo, puntos) {
             throw new Error('Error al guardar la puntuación');
         }
 
-        alert('Puntuación guardada con éxito');
+        alert('Puntuación fue guardada con éxito');
         cargarPuntuaciones(); // Cargar la tabla de puntuaciones después de guardar
     } catch (error) {
         console.error('Error al guardar la puntuación:', error);
@@ -246,11 +249,10 @@ async function cargarPuntuaciones() {
 
 function mostrarPuntuaciones(scores) {
     let contenedorTabla = document.getElementsByClassName("contenedor-tabla")[0];
-    contenedorTabla.innerHTML = ""; // Limpiar cualquier contenido anterior
+    contenedorTabla.innerHTML = "";
     let tabla = document.createElement("table");
     let thead = document.createElement("thead");
     let tbody = document.createElement("tbody");
-    // Encabezados de la tabla
     let encabezados = ["Nombre", "Tiempo (segundos)", "Puntos", "Fecha"];
     let tr = document.createElement("tr");
     encabezados.forEach(encabezado => {
@@ -259,7 +261,6 @@ function mostrarPuntuaciones(scores) {
         tr.appendChild(th);
     });
     thead.appendChild(tr);
-    // Filas de la tabla con las puntuaciones
     scores.forEach(score => {
         let tr = document.createElement("tr");
         tr.innerHTML = `
