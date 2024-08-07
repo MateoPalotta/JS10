@@ -12,3 +12,17 @@ Por medio de las API Fetch o Axios conectar a la BBDD y almacenar el score del j
 1. Clona este repositorio:
    ```sh
    git clone https://github.com/MateoPalotta/JS10
+
+2. Navega al directorio del proyecto:
+   ```sh
+   cd JS10
+
+3. Instala las dependencias:
+   ```sh
+   npm i express mysql
+
+# Ejecución
+
+Para iniciar el servidor ejecuta:
+   ```sh
+   node server.js
